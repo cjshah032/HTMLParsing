@@ -1,0 +1,7 @@
+C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\obj\Debug\OOPConcepts.csprojAssemblyReference.cache
+C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\obj\Debug\OOPConcepts.csproj.CoreCompileInputs.cache
+C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\bin\Debug\OOPConcepts.exe.config
+C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\bin\Debug\OOPConcepts.exe
+C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\bin\Debug\OOPConcepts.pdb
+C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\obj\Debug\OOPConcepts.exe
+C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\obj\Debug\OOPConcepts.pdb
