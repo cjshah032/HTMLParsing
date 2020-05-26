@@ -11,72 +11,15 @@ namespace OOPConcepts
     {
         static void Main(string[] args)
         {
-            Directory.SetCurrentDirectory("C:\\Users\\CHINMAY SHAH\\source\\repos\\OOPConcepts");
-            string[] lines = File.ReadAllLines("HMTL.txt");
-            bool tagNameflag = false, tagflag = false;
-            Tree tags = new Tree();
-            foreach (string line in lines)
-            {
-                for(int j=0; j<line.Length; j++)
-                {
-                    if(line[j] == '<')
-                    {
-                        Console.Write(line[j]);
-                        tagNameflag = true;
-                        tagflag = true;
-                    }
-                    else if(tagflag == true && line[j] != '/')
-                    {
-                        if (tagNameflag == true)
-                        {
-                            string tag = "";
-                            while (line[j] != ' ')
-                            {
-                                Console.Write(line[j]);
-                                if (line[j] == '>')
-                                {
-                                    tagflag = false;
-                                    break;
-                                }
-                                tag += line[j];
-                                j++;
-                            }
-
-                            tags.InsertNewBranch(tag);
-                            tagNameflag = false;
-                        }
-                        else
-                        {   
-                            if(line[j] == '>')
-                            {
-                                tagflag = false;
-                                Console.Write(line[j]);
-                            }
-                        }
-                    }
-                    else if(tagflag == true && line[j] == '/')
-                    {
-                        //string tag = "";
-                        tagflag = false;
-                        tagNameflag = false;
-                        while(line[j] != '>')
-                        {
-                            Console.Write(line[j]);
-                            //tag += line[j];
-                            j++;
-                        }
-                        tags.GetParent();
-                        j--;
-                    }
-                    else
-                    {
-                        Console.Write(line[j]);
-                    }
-                }
-                Console.WriteLine();
-            }
-
-            tags.Traverse();
+            Console.WriteLine("Enter the path (with filename and extension)");
+            string path = Console.ReadLine();
+            string input = File.ReadAllText(path);
+            Console.WriteLine("Enter the new file name (NOTE: It will be saved in the same directory as the old file)");
+            string newfilename = Console.ReadLine();
+            TagParser parser = new TagParser(input);
+            parser.WriteOutput(Path.GetDirectoryName(path), newfilename);
+            //Console.WriteLine(Path.GetDirectoryName(path));
+            //"C:\Users\CHINMAY SHAH\source\repos\OOPConcepts"
         }
     }
 
