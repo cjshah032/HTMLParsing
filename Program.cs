@@ -18,8 +18,7 @@ namespace OOPConcepts
             string newfilename = Console.ReadLine();
             TagParser parser = new TagParser(input);
             parser.WriteOutput(Path.GetDirectoryName(path), newfilename);
-            //Console.WriteLine(Path.GetDirectoryName(path));
-            //"C:\Users\CHINMAY SHAH\source\repos\OOPConcepts"
+            //"C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\HMTL.txt"
         }
     }
 

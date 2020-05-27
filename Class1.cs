@@ -119,14 +119,14 @@ namespace OOPConcepts
         List<string> tagNames = new List<string>();
 
         string Input = default;
-        string Output = default;
+        StringBuilder Output = null;
 
         public TagParser (string input)
         {
             tags.Clear();
             tagNames.Clear();
             Input = input;
-            StringBuilder Output = new StringBuilder(Input);
+            Output = new StringBuilder(Input);
 
             int start = 0, end = 0, slash = 0, space = 0;
 
@@ -138,19 +138,17 @@ namespace OOPConcepts
                 space = Input.IndexOf(' ', start, end - start);
 
                 string value = default;
-                value = Input.Substring(start, end - start);
+                value = Input.Substring(start, end - start + 1);
                 Tag t = new Tag(value, start, end, space, slash);
                 tags.Add(t);
                 tagNames.Add(t.TagName);
                 Output = Output.Replace(value, t.ToString());
             }
+
         }
 
         public void WriteOutput(string path, string newFileName)
-        {
-            File.WriteAllText(Path.Combine(path, newFileName), Output);
-            Console.Write(Output);
-            return;
-        }
+            =>  File.WriteAllText(Path.Combine(path, newFileName), Output.ToString());
+        
     }
 }
