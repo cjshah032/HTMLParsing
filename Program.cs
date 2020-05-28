@@ -9,6 +9,7 @@ namespace OOPConcepts
 {
     class Program
     {
+        //Driver function for HTML parsing
         static void Main(string[] args)
         {
             Console.WriteLine("Enter the path (with filename and extension)");
@@ -18,8 +19,9 @@ namespace OOPConcepts
             string newfilename = Console.ReadLine();
             TagParser parser = new TagParser(input);
             parser.WriteOutput(Path.GetDirectoryName(path), newfilename);
-            //parser.tree.Traverse();
-            //"C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\HMTL.txt"
+            //parser.tree.Traverse();                                           //Invokable to analyse the heirarchy
+            //"C:\Users\CHINMAY SHAH\source\repos\OOPConcepts\chapter1.html"    //file used for testing.
+            
         }
     }
 }

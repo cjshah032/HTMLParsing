@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/* 
+    This file contains the implementaion of a general, non-binary tree.
+    The node classes are defined non-specific to the Tags class.
+    The class can be modified through change of variable names to work with different data.
+*/
+
 namespace OOPConcepts
 {
-    class DNode
+
+    //<summary>
+    //Stores the information about each branch/node in the tree. 
+    //The names of each element are self explanatory.
+    //</summary>
+    class DNode                 
     {
         public string tag;
         public List<DNode> child;
@@ -19,17 +31,25 @@ namespace OOPConcepts
         }
     }
 
+    //<summary>
+    //This class implements a non-binary tree structure (mostly to study heirarchy).
+    //Various functions are defined (also self-explanatory)
+    //to traverse through the tree and also to add new branches or delete existing branch.
+    //The class can be modified to work on different types of nodes (only a change of variable names would be required)
+    //</summary>
     class Tree
     {
         DNode root;
         DNode current;
 
+        //Simple Constructor to initialize root and current node to null
         public Tree()
         {
             root = null;
             current = null;
         }
 
+        //Sets the current node to its parent
         public void GetParent()
         {
             if (root == null)
@@ -49,6 +69,7 @@ namespace OOPConcepts
             }
         }
 
+        //Inserts a new branch/node in the tree. 
         public void InsertNewBranch(string data)
         {
             DNode newBranch = new DNode(data);
@@ -66,6 +87,7 @@ namespace OOPConcepts
             }
         }
 
+        //Deletes the current node. All the child elements are also lost with it.
         public void DeleteCurrBranch()
         {
             if (root == null)
@@ -88,6 +110,8 @@ namespace OOPConcepts
             }
         }
 
+        //A combination of this and Traverse() is used to display all elements
+        //on the console in a heirarchial model.
         void WriteElements(int tier, DNode curr)
         {
             string tabs = "";

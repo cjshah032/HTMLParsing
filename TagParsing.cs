@@ -8,26 +8,37 @@ using System.Threading.Tasks;
 
 namespace OOPConcepts
 {
+    // <summary>
+    // This class contains information about the tags encountered in an HTML document. 
+    // <summary>
     class Tag
     {
-        string Value;
-        public string TagName { get; set; }
+        string Value;                               //to store the tag in its entirity, attributes and styles included
+        public string TagName { get; set; }         //to store only the name of the tag
 
-        public enum TagType
+        public enum TagType                         //enlists the different types of tags 
         {
             StartTag,
             EndTag,
             SelfContained
         }
 
-        bool hasStyles;
+        bool hasStyles;                             //boolean for checking if there are styles or attributes associated with a tag
 
-        public TagType type { get; set; }
+        public TagType type { get; set; }           //to store the type of tag
+
+        //The different indexes will be useful for deciding the 
+        //tagtype and also extracting the name of the tag
         int StartIndex { get; set; }
         int EndIndex { get; set; }
         int SpaceIndex { get; set; }
         int SlashIndex { get; set; }
 
+
+        //Constructor function (no other overloads)
+        //<summary>
+        //It takes in the value and index parameters, then decides the type of the tag, and finally sets the name of the tag
+        //</summary>
         public Tag(string value, int start, int end, int space, int slash)
         {
             Value = value;
@@ -42,15 +53,7 @@ namespace OOPConcepts
                 hasStyles = false;
             }
 
-            else if (SlashIndex == -1)
-            {
-                type = TagType.StartTag;
-                if (SpaceIndex != -1)
-                    hasStyles = true;
-                else hasStyles = false;
-            }
-
-            else
+            else if (SlashIndex == EndIndex - 1)
             {
                 type = TagType.SelfContained;
                 if (SpaceIndex != -1)
@@ -58,9 +61,20 @@ namespace OOPConcepts
                 else hasStyles = false;
             }
 
+            else
+            {
+                type = TagType.StartTag;
+                if (SpaceIndex != -1)
+                    hasStyles = true;
+                else hasStyles = false;
+            }
+
+
             SetTagName();
         }
 
+
+        //Extracts the name of the tag 
         void SetTagName()
         {
             if (hasStyles == true)
@@ -94,6 +108,7 @@ namespace OOPConcepts
             }
         }
 
+        //Overriding ToString function to display the tag as intended whenever it is called
         public override string ToString()
         {
             switch (type)
@@ -113,15 +128,26 @@ namespace OOPConcepts
         }
     }
 
+    //<summary>
+    //This class reads in the HTML file and finds the tags in it. A list of the tags is maintained for reference.
+    //Also implements a tree structure to display the heirarchy of tags as found in the document
+    //After the implementation the attributes and styles associated with all tags are stripped off and the new skeletal 
+    //document is stored in another file
+    //</summary>
     class TagParser
     {
-        List<Tag> tags = new List<Tag>();
-        List<string> tagNames = new List<string>();
-        public Tree tree = null;
+        List<Tag> tags = new List<Tag>();                       //stores all the tags encountered in the HTML document
+        List<string> tagNames = new List<string>();             //stores the names of the tags encountered
+        public Tree tree = null;                                //to implement the tree
 
-        string Input = default;
-        StringBuilder Output = null;
+        string Input = default;                                 //This stores the entire document contents for doing operations
+        StringBuilder Output = null;                            //To store the output till it is written into a file
 
+        //Constructor (no other overloads)
+        //<summary>
+        //takes the contents of a document as input.
+        //Finds the tags, maintains a list, implements the tree and prepares the output.
+        //</summary>
         public TagParser (string input)
         {
             tags.Clear();
@@ -153,6 +179,7 @@ namespace OOPConcepts
 
         }
 
+        //Writes the output into a file. 
         public void WriteOutput(string path, string newFileName)
             =>  File.WriteAllText(Path.Combine(path, newFileName), Output.ToString());
         
